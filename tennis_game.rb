@@ -7,8 +7,8 @@ class TennisTest < Test::Unit::TestCase
     game = TennisGame.new
     #When you check the score
     actual = game.score
-    #Then the score should be 0 to 0
-    assert_equal(actual, 0)
+    #Then the score should be love, love
+    assert_equal(actual, ['love', 'love'])
    end
    
    def test_player_1_scores_for_the_first_time
@@ -26,7 +26,7 @@ end
 
 class TennisGame
   def score
-    0
+    ['fifteen', 'love']
   end
   
   def new_player_point
