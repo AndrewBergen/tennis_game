@@ -11,11 +11,25 @@ class TennisTest < Test::Unit::TestCase
     assert_equal(actual, 0)
    end
    
+   def test_player_1_scores_for_the_first_time
+     #Given a scoreless game
+     game = TennisGame.new
+     #When player_1 scores
+     actual_p1, actual_p2 = game.new_player_point()
+     #Then the score should be fifteen, love
+     assert_equal(actual_p1, 'fifteen')
+     assert_equal(actual_p2, 'love')
+   end
+   
 end
 
 class TennisGame
   def score
     0
   end
+  
+  def new_player_point
+  end
+  
 end
   
