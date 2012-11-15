@@ -26,16 +26,20 @@ end
 
 class TennisGame
   def initialize
-    @score = ['love','love']
+    @score_1 = Score.new
+    @score_2 = Score.new
   end
   
   def score
-    @score
+    [@score_1, @score_2]
   end
   
   def new_player_point
-    ['fifteen', 'love']
+    score
   end
   
 end
   
+class Score
+  
+end
