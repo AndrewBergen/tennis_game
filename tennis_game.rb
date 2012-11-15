@@ -31,7 +31,7 @@ class TennisGame
   end
   
   def score
-    [@score_1, @score_2]
+    [@score_1.to_s, @score_2.to_s]
   end
   
   def new_player_point
@@ -41,5 +41,7 @@ class TennisGame
 end
   
 class Score
-  
+  def to_s
+    'love'
+  end
 end
