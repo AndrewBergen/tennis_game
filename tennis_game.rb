@@ -35,6 +35,7 @@ class TennisGame
   end
   
   def new_player_point
+    @score_1 += 1
     score
   end
   
