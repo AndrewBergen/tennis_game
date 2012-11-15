@@ -29,6 +29,7 @@ class TennisGame
   end
   
   def new_player_point
+    ['fifteen', 'love']
   end
   
 end
