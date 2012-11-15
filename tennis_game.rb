@@ -35,14 +35,27 @@ class TennisGame
   end
   
   def new_player_point
-    @score_1 += 1
+    @score_1.increase
     score
   end
   
 end
   
 class Score
-  def to_s
-    'love'
+  def initialize
+    @score = 0
   end
+
+  def to_s
+    if @score == 0 
+      'love'
+    else
+      'fifteen'
+    end
+  end
+  
+  def increase
+   @score += 1
+  end
+  
 end
