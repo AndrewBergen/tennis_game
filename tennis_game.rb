@@ -25,8 +25,12 @@ class TennisTest < Test::Unit::TestCase
 end
 
 class TennisGame
+  def initialize
+    @score = ['love','love']
+  end
+  
   def score
-    ['fifteen', 'love']
+    @score
   end
   
   def new_player_point
