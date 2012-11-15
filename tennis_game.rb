@@ -19,6 +19,7 @@ class TennisTest < Test::Unit::TestCase
      #Then the score should be fifteen, love
      assert_equal(actual_p1, 'fifteen')
      assert_equal(actual_p2, 'love')
+     assert_equal([actual_p1, actual_p2], game.score)
    end
    
 end
