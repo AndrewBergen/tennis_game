@@ -37,11 +37,23 @@ class TennisTest < Test::Unit::TestCase
      #given a player has 1 point
      game = TennisGame.new
      game.new_player_1_point
-     #WHen a player scores another point
+     #When a player scores another point
      actual_p1, actual_p2 = game.new_player_1_point
      #Then that player's score should be 'thirty'
      assert_equal(actual_p1, 'thirty')
      assert_equal([actual_p1, actual_p2], game.score)
+   end
+
+   def test_when_a_player_has_3_points
+     #Given a player has 2 points
+     game = TennisGame.new
+     game.new_player_1_point
+     game.new_player_1_point
+     #When that player scores again
+     actual_p1, actual_p2 = game.new_player_1_point
+     #Then that player's score should be 'fourty'
+     assert_equal(actual_p1, 'fourty')
+     assert_equal([actual_p1,actual_p2], game.score)
    end
    
 end
@@ -76,6 +88,8 @@ class Score
   def to_s
     if @score == 0 
       'love'
+    elsif @score == 2
+      'thirty'
     else
       'fifteen'
     end
