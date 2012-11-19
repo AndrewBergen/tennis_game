@@ -56,6 +56,21 @@ class TennisTest < Test::Unit::TestCase
      assert_equal([actual_p1,actual_p2], game.score)
    end
    
+   def test_when_both_players_have_3_or_more_points_and_are_tied
+      #Given a tennis game where both players have 3 or more points and are tied
+      game = TennisGame.new
+      game.new_player_1_point
+      game.new_player_1_point
+      game.new_player_1_point
+      game.new_player_2_point
+      game.new_player_2_point
+      game.new_player_2_point
+      #When I call score
+      actual_p1, actual_p2 = game.score
+      #Then it should return 'deuce'
+      assert_equal('deuce', [actual_p1,actual_p2])
+   end
+   
 end
 
 class TennisGame
