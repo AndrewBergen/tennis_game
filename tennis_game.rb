@@ -15,7 +15,7 @@ class TennisTest < Test::Unit::TestCase
      #Given a scoreless game
      game = TennisGame.new
      #When player_1 scores
-     actual_p1, actual_p2 = game.new_player_point()
+     actual_p1, actual_p2 = game.new_player_1_point()
      #Then the score should be fifteen, love
      assert_equal(actual_p1, 'fifteen')
      assert_equal(actual_p2, 'love')
@@ -26,7 +26,7 @@ class TennisTest < Test::Unit::TestCase
      #Given a scoreless game
      game = TennisGame.new
      #when player_2 scores
-     actual_p1, actual_p2 = game.new_player_point()
+     actual_p1, actual_p2 = game.new_player_2_point()
      #Then the score should be love, fifteen
      assert_equal(actual_p1, 'love')
      assert_equal(actual_p2, 'fifteen')
@@ -45,8 +45,13 @@ class TennisGame
     [@score_1.to_s, @score_2.to_s]
   end
   
-  def new_player_point
+  def new_player_1_point
     @score_1.increase
+    score
+  end
+  
+  def new_player_2_point
+    @score_2.increase
     score
   end
   
