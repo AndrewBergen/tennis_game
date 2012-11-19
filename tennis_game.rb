@@ -90,6 +90,8 @@ class Score
       'love'
     elsif @score == 2
       'thirty'
+    elsif @score == 3
+      'fourty'
     else
       'fifteen'
     end
