@@ -63,9 +63,9 @@ class TennisTest < Test::Unit::TestCase
         game.new_player_2_point
       end
       #When I call score
-      actual_p1, actual_p2 = game.score
+      actual = game.score
       #Then it should return 'deuce'
-      assert_equal('deuce', [actual_p1,actual_p2])
+      assert_equal('deuce', actual)
    end
    
 end
@@ -98,17 +98,12 @@ class Score
   end
 
   def to_s
+    if @score[0] >= 3 and @score[0] == @score[1] then
+      "deuce"
+    else
     @score_strings[@score[0]] + " - " + @score_strings[@score[1]]
-    #if @score == [0,0] 
-    #  'love'
-    #elsif @score == 2
-    #  'thirty'
-    #elsif @score == 3
-    #  'fourty'
-    #else
-    #  'fifteen'
-    #end
   end
+end
   
   def increase_player_1
    @score[0] += 1
