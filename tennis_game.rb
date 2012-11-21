@@ -8,52 +8,49 @@ class TennisTest < Test::Unit::TestCase
     #When you check the score
     actual = game.score
     #Then the score should be love, love
-    assert_equal(actual, ['love', 'love'])
+    assert_equal("love - love", actual)
    end
    
    def test_player_1_scores_for_the_first_time
      #Given a scoreless game
      game = TennisGame.new
      #When player_1 scores
-     actual_p1, actual_p2 = game.new_player_1_point
+     actual = game.new_player_1_point
      #Then the score should be fifteen, love
-     assert_equal(actual_p1, 'fifteen')
-     assert_equal(actual_p2, 'love')
-     assert_equal([actual_p1, actual_p2], game.score)
+     assert_equal('fifteen - love', actual)
+     assert_equal(actual, game.score)
    end
    
    def test_player_2_scores_for_the_first_time
      #Given a scoreless game
      game = TennisGame.new
      #when player_2 scores
-     actual_p1, actual_p2 = game.new_player_2_point
+     actual = game.new_player_2_point
      #Then the score should be love, fifteen
-     assert_equal(actual_p1, 'love')
-     assert_equal(actual_p2, 'fifteen')
-     assert_equal([actual_p1, actual_p2], game.score)
+     assert_equal('love - fifteen', actual)
+     assert_equal(actual, game.score)
    end
    
-   def test_when_a_player_has_2_points
+   def test_when_player_1_has_2_points_and_player_2_is_scoreless
      #given a player has 1 point
      game = TennisGame.new
      game.new_player_1_point
      #When a player scores another point
-     actual_p1, actual_p2 = game.new_player_1_point
+     actual = game.new_player_1_point
      #Then that player's score should be 'thirty'
-     assert_equal(actual_p1, 'thirty')
-     assert_equal([actual_p1, actual_p2], game.score)
+     assert_equal(actual, 'thirty - love')
+     assert_equal(actual, game.score)
    end
 
-   def test_when_a_player_has_3_points
+   def test_when_player_1_has_3_points_and_player_2_is_scoreless
      #Given a player has 2 points
      game = TennisGame.new
-     game.new_player_1_point
-     game.new_player_1_point
+     2.times {game.new_player_1_point}
      #When that player scores again
-     actual_p1, actual_p2 = game.new_player_1_point
+     actual = game.new_player_1_point
      #Then that player's score should be 'fourty'
-     assert_equal(actual_p1, 'fourty')
-     assert_equal([actual_p1,actual_p2], game.score)
+     assert_equal(actual, 'fourty - love')
+     assert_equal(actual, game.score)
    end
    
    def test_when_both_players_have_3_or_more_points_and_are_tied
@@ -75,21 +72,20 @@ end
 
 class TennisGame
   def initialize
-    @score_1 = Score.new
-    @score_2 = Score.new
+    @score = Score.new
   end
   
   def score
-    [@score_1.to_s, @score_2.to_s]
+    @score.to_s
   end
   
   def new_player_1_point
-    @score_1.increase
+    @score.increase_player_1
     score
   end
   
   def new_player_2_point
-    @score_2.increase
+    @score.increase_player_2
     score
   end
   
@@ -97,23 +93,29 @@ end
   
 class Score
   def initialize
-    @score = 0
+    @score = [0, 0]
+    @score_strings = ['love', 'fifteen', 'thirty', 'fourty']
   end
 
   def to_s
-    if @score == 0 
-      'love'
-    elsif @score == 2
-      'thirty'
-    elsif @score == 3
-      'fourty'
-    else
-      'fifteen'
-    end
+    @score_strings[@score[0]] + " - " + @score_strings[@score[1]]
+    #if @score == [0,0] 
+    #  'love'
+    #elsif @score == 2
+    #  'thirty'
+    #elsif @score == 3
+    #  'fourty'
+    #else
+    #  'fifteen'
+    #end
   end
   
-  def increase
-   @score += 1
+  def increase_player_1
+   @score[0] += 1
+  end
+  
+  def increase_player_2
+    @score[1] += 1
   end
   
 end
