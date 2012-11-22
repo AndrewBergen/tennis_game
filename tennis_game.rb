@@ -55,7 +55,6 @@ class TennisTest < Test::Unit::TestCase
    
    def test_when_both_players_have_3_or_more_points_and_are_tied
       #Given a tennis game where both players have 3 or more points and are tied
-      #This is a bit ugly. I could use a set_player_points function, but I don't see a use outside of my tests.
       game = TennisGame.new
       3.times {game.new_player_1_point}
       
@@ -66,6 +65,19 @@ class TennisTest < Test::Unit::TestCase
       actual = game.score
       #Then it should return 'deuce'
       assert_equal('deuce', actual)
+   end
+   
+   def test_player_1_advantage
+     #Given a tennis game where both players have 3 or more points and are tied
+     game = TennisGame.new
+     3.times do 
+       game.new_player_1_point
+       game.new_player_2_point
+     end
+     #When player 1 scores
+     actual = game.new_player_1_point
+     #Then it should return "advantage player 1"
+     assert_equal("advantage player 1", actual)
    end
    
 end
@@ -100,8 +112,10 @@ class Score
   def to_s
     if @score[0] >= 3 and @score[0] == @score[1] then
       "deuce"
+    elsif @score[0] >= 3 and @score[0] - @score[1] == 1 then
+      "advantage player 1"
     else
-    @score_strings[@score[0]] + " - " + @score_strings[@score[1]]
+      @score_strings[@score[0]] + " - " + @score_strings[@score[1]]
   end
 end
   
