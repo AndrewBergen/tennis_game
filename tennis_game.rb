@@ -80,6 +80,19 @@ class TennisTest < Test::Unit::TestCase
      assert_equal("advantage player 1", actual)
    end
    
+   def test_player_2_advantage
+     #Given a tennis game where both players have 3 or more points and are tied
+     game = TennisGame.new
+     3.times do 
+       game.new_player_1_point
+       game.new_player_2_point
+     end
+     #When player 2 scores
+     actual = game.new_player_2_point
+     #Then it should return "advantage player 1"
+     assert_equal("advantage player 2", actual)
+   end
+   
 end
 
 class TennisGame
