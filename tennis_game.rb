@@ -83,18 +83,33 @@ class TennisTest < Test::Unit::TestCase
    def test_player_2_advantage
      #Given a tennis game where both players have 3 or more points and are tied
      game = TennisGame.new
-     4.times do 
+     3.times do 
        game.new_player_1_point
        game.new_player_2_point
      end
      #When player 2 scores
      actual = game.new_player_2_point
-     #Then it should return "advantage player 1"
+     #Then it should return "advantage player 2"
      assert_equal("advantage player 2", actual)
    end
-   
-   
-end
+
+   def test_player_1_has_3_or_more_points_and_is_a_point_or_more_ahead_and_scores
+     #Given a game where player 1 has 'fourty' and player 2 is behind a point or more
+     game = TennisGame.new
+     2.times do 
+         game.new_player_1_point
+         game.new_player_2_point
+     end
+     game.new_player_1_point
+     #When player 1 scores
+     actual = game.new_player_1_point
+     #then it should return "game player 1"
+     assert_equal(actual, "game player 1")
+   end
+
+end   
+ 
+
 
 class TennisGame
   def initialize
@@ -126,14 +141,16 @@ class Score
   def to_s
     if @score[0] >= 3 and @score[0] == @score[1] then
       "deuce"
-    elsif @score[0] >= 4 and @score[0] - @score[1] == 1 then
+    elsif @score[0] >= 3 and @score[1] >=3 and @score[0] - @score[1] == 1 then
       "advantage player 1"
-    elsif @score[0] >= 4 and @score[0] - @score[1] == -1 then
+    elsif @score[0] >= 3 and @score[1] >=3 and @score[0] - @score[1] == -1 then
       "advantage player 2"
+    elsif @score[0] > 3 and @score[0] - @score[1] > 1 then
+      "game player 1"
     else
       @score_strings[@score[0]] + " - " + @score_strings[@score[1]]
+    end
   end
-end
   
   def increase_player_1
    @score[0] += 1
