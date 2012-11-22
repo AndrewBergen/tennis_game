@@ -107,20 +107,6 @@ class TennisTest < Test::Unit::TestCase
      assert_equal(actual, "game player 1")
    end
 
-   def test_player_2_has_3_or_more_points_and_is_a_point_or_more_ahead_and_scores
-     #Given a game where player 1 has 'fourty' and player 2 is behind a point or more
-     game = TennisGame.new
-     2.times do 
-         game.new_player_1_point
-         game.new_player_2_point
-     end
-     game.new_player_2_point
-     #When player 1 scores
-     actual = game.new_player_2_point
-     #then it should return "game player 1"
-     assert_equal(actual, "game player 2")
-   end
-
 end   
  
 
